@@ -105,12 +105,14 @@
 
 <script>
     function speak(text) {
-        window.speechSynthesis.cancel();
-        const msg = new SpeechSynthesisUtterance(text);
-        msg.lang = 'zh-HK';
-        msg.rate = 0.75;
-        window.speechSynthesis.speak(msg);
-    }
+    window.speechSynthesis.cancel();
+    // 将“性命”替换为“性，命”，强制TTS分开读，避免连读变调
+    let fixedText = text.replace(/性命/g, "性，命");
+    const msg = new SpeechSynthesisUtterance(fixedText);
+    msg.lang = 'zh-HK';
+    msg.rate = 0.75;
+    window.speechSynthesis.speak(msg);
+}
 </script>
 
 </body>
